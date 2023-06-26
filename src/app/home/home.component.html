@@ -1,0 +1,73 @@
+<div class="text-center mt-5 mb-5">
+  <h1>Get connected with random online-chats!</h1>
+  <p>A dev project built with .NET Core- SignalR and Angular</p>
+</div>
+
+<div class="container d-flex justify-content-center mb-5">
+  <div class="col-12 col-lg-5">
+    <form [formGroup]="userForm" (ngSubmit)="submitForm()">
+      <div class="row">
+        <h6>Enter a great username to start</h6>
+      </div>
+      <div class="row">
+        <div class="col-lg-8 col-sm-6 mb-1">
+          <input
+            type="text"
+            class="form-control mb-2"
+            placeholder="name ex. canelita12, rollox._."
+            formControlName="name"
+            [class.is-invalid]="submitted && userForm.get('name')?.errors"
+          />
+          <span
+            class="text-danger"
+            *ngIf="submitted && userForm.get('name')?.hasError('required')"
+          >
+            Come on! It's just a name
+          </span>
+          <span
+            class="text-danger"
+            *ngIf="
+              (submitted && userForm.get('name')?.hasError('maxlength')) ||
+              userForm.get('name')?.hasError('minlength')
+            "
+          >
+            Min is 3. Max is 15 characters
+          </span>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <button class="btn btn-primary">Send</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="container mb-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4 mb-4 d-flex">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title font-weight-bold">
+            Join in group to chat with gpt!
+          </h5>
+          <p class="card-text">
+            Add gpt to your chat to make up topics, moderate conversation or
+            analyse text.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-4 mb-4 d-flex">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title font-weight-bold">
+            Create different conversation rooms!
+          </h5>
+          <p class="card-text">
+            Share conversations inviting users and meet new people and topics.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
