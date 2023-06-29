@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { SignalRService } from './signalr.service';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +8,11 @@ import { SignalRService } from './signalr.service';
 export class AppComponent {
   title = 'chat-app';
 
-  constructor(private signalRService: SignalRService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.signalRService.registerUser("Gary");
-    this.signalRService.createConnection();
+    // this.signalRService.registerUser("Gary");
+    // this.signalRService.createConnection();
     // this.signalRService.receiveMessage((user, message) => {
     //   console.log(`${user}: ${message}`);
     // });

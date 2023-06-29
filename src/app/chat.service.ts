@@ -3,11 +3,18 @@ import { HttpClient } from '@angular/common/http';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { environments } from '../environments/environments';
 
+type User = {
+  Username: string,
+  Password: string
+}
 
 @Injectable({
   providedIn: 'root'
 })
-export class SignalRService {
+export class ChatService {
+
+  userName: string = "";
+  onlineUsers: string[] = [];
 
   private hubConnection?: HubConnection;
   private host: string = "";
@@ -16,10 +23,21 @@ export class SignalRService {
     this.host = environments.host;
   }
 
-  registerUser(user: any) {
+  /**
+   * Registers 
+   * @param user 
+   * @returns 
+   */
+  registerUser(user: User) {
+    user["Password"] = "";
     return this.httpClient.post(`${this.host}api/chat/register-user`, user);
   }
 
+
+
+  /**
+   * Calls Angular app from serverside
+   */
   createConnection() {
     this.hubConnection = new HubConnectionBuilder()
       .withUrl(`${this.host}hubs/chat`)
@@ -31,8 +49,11 @@ export class SignalRService {
     })
 
     this.hubConnection.on("UserConnected", () => {
-      this.addUserConnectionId()
-      // console.log("The server has called here! ")
+      this.addUserConnectionId();
+    });
+
+    this.hubConnection.on("OnlineUsers", (onlineUsers) => {
+      this.onlineUsers = [...onlineUsers];
     });
   }
 
@@ -42,10 +63,14 @@ export class SignalRService {
     })
   }
 
+  /**
+  * Calls serverside from Angular
+  */
   async addUserConnectionId() {
-    return this.hubConnection?.invoke("UserConnectionId").catch(error => {
+    return this.hubConnection?.invoke("AddUserConnectionId", this.userName).catch(error => {
       console.log("error");
     })
   }
+
 
 }
