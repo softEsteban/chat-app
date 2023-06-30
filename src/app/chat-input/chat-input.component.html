@@ -1,0 +1,19 @@
+<form action="" #messageForm="ngForm" (ngSubmit)="sendMessage()">
+  <input
+    type="text"
+    class="form-control"
+    name="content"
+    required
+    placeholder="Type your message"
+    [(ngModel)]="content"
+  />
+  <div class="input-group-append">
+    <button
+      [disabled]="!messageForm.valid"
+      class="btn btn-primary"
+      (click)="sendMessage()"
+    >
+      Send
+    </button>
+  </div>
+</form>

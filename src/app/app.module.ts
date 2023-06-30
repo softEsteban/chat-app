@@ -9,6 +9,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChatComponent } from './chat/chat.component';
+import { ChatInputComponent } from './chat-input/chat-input.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { ChatComponent } from './chat/chat.component';
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    ChatComponent
+    ChatComponent,
+    ChatInputComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,

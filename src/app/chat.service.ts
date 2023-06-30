@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { environments } from '../environments/environments';
+import { User } from './models/user'
+import { Message } from './models/message'
 
-type User = {
-  Username: string,
-  Password: string
-}
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +13,7 @@ export class ChatService {
 
   userName: string = "";
   onlineUsers: string[] = [];
+  messages: Message[] = [{ From: "Esteban", Content: "his is a test" }];
 
   private hubConnection?: HubConnection;
   private host: string = "";
@@ -55,6 +54,11 @@ export class ChatService {
     this.hubConnection.on("OnlineUsers", (onlineUsers) => {
       this.onlineUsers = [...onlineUsers];
     });
+
+    this.hubConnection.on("NewMessage", (newMessage: Message) => {
+      console.log("new", newMessage)
+      this.messages = [...this.messages, newMessage];
+    })
   }
 
   stopConnection() {
@@ -72,5 +76,18 @@ export class ChatService {
     })
   }
 
+  async sendMessage(content: string) {
+    try {
+      const message: Message = {
+        From: this.userName,
+        Content: content
+      }
+      return this.hubConnection?.invoke("ReceiveMessage", message).catch(error => {
+        console.log("error");
+      })
+    } catch (error) {
+      console.log(error)
+    }
 
+  }
 }
