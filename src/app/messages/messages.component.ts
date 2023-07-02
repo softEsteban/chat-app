@@ -11,10 +11,9 @@ export class MessagesComponent {
 
   @Input() messages: Message[] = [];
 
-  constructor() {
-
-  }
+  constructor() { }
 
   ngOnInit(): void {
+
   }
 }

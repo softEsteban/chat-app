@@ -13,7 +13,8 @@ export class ChatService {
 
   userName: string = "";
   onlineUsers: string[] = [];
-  messages: Message[] = [{ From: "Esteban", Content: "his is a test" }];
+  messages: Message[] = [{ from: "Esteban", content: "his is a test" }];
+
 
   private hubConnection?: HubConnection;
   private host: string = "";
@@ -56,9 +57,9 @@ export class ChatService {
     });
 
     this.hubConnection.on("NewMessage", (newMessage: Message) => {
-      console.log("new", newMessage)
-      this.messages = [...this.messages, newMessage];
+      this.messages = [...this.messages as Message[], newMessage];
     })
+
   }
 
   stopConnection() {
@@ -79,8 +80,8 @@ export class ChatService {
   async sendMessage(content: string) {
     try {
       const message: Message = {
-        From: this.userName,
-        Content: content
+        from: this.userName,
+        content: content
       }
       return this.hubConnection?.invoke("ReceiveMessage", message).catch(error => {
         console.log("error");

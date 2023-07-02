@@ -1,6 +1,8 @@
-<div *ngFor="let chatMessage of messages" class="media mb-3">
-  <div class="media-body">
-    <h6 class="mt-0">{{ chatMessage.From }}</h6>
-    <p class="message">{{ chatMessage.Content }}</p>
+<div *ngFor="let chatMessage of messages" class="media mb-0">
+  <div class="media-body d-flex">
+    <p style="margin-right: 5px">
+      <strong> {{ chatMessage.from }}</strong>
+    </p>
+    <p class="message">{{ chatMessage.content }}</p>
   </div>
 </div>

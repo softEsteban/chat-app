@@ -11,15 +11,8 @@ export class AppComponent {
   constructor() { }
 
   ngOnInit(): void {
-    // this.signalRService.registerUser("Gary");
-    // this.signalRService.createConnection();
-    // this.signalRService.receiveMessage((user, message) => {
-    //   console.log(`${user}: ${message}`);
-    // });
+
   }
 
-  // sendMessage(user: string, message: string): void {
-  //   this.signalRService.sendMessage(user, message);
-  // }
 
 }

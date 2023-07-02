@@ -1,5 +1,5 @@
 export interface Message {
-  From: string;
-  To?: string;
-  Content: string;
+  from: string;
+  to?: string;
+  content: string;
 }
